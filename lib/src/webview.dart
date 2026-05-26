@@ -287,7 +287,7 @@ class WebView extends StatefulWidget {
   WebViewState createState() => WebViewState();
 }
 
-class WebViewState extends State<WebView> with WebeViewTextInput {
+class WebViewState extends State<WebView> with WebViewTextInput {
   final GlobalKey _key = GlobalKey();
   String _composingText = '';
   late final _focusNode = FocusNode();
@@ -341,7 +341,7 @@ class WebViewState extends State<WebView> with WebeViewTextInput {
 
     _controller._onImeCompositionRangeChangedMessage = (x, y) {
       final box = _key.currentContext!.findRenderObject() as RenderBox;
-      updateIMEComposionPosition(
+      updateIMECompositionPosition(
           x.toDouble(), y.toDouble(), box.localToGlobal(Offset.zero));
     };
 

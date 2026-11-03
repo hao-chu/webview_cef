@@ -130,7 +130,7 @@ install(DIRECTORY "${NATIVE_ASSETS_DIR}"
 #     COMPONENT Runtime)
 # endforeach(bundled_library)
 if(PLUGIN_BUNDLED_LIBRARIES)
-  install(FILES "${PLUGIN_BUNDLED_LIBRARIES}"
+  install(FILES ${PLUGIN_BUNDLED_LIBRARIES}
     DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
 endif()

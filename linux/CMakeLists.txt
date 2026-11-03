@@ -86,9 +86,13 @@ target_include_directories(${PLUGIN_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/..
 
 #########################################cef#########################################
 set(CEF_TARGET ${PLUGIN_NAME})
-ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+# The Linux distribution contains only Release runtime binaries.
+ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_RELEASE}" "${CEF_LIB_RELEASE}")
+set_target_properties(libcef_lib PROPERTIES MAP_IMPORTED_CONFIG_PROFILE Release)
+set(CEF_BINARY_DIR "${CEF_BINARY_DIR_RELEASE}")
 SET_CEF_TARGET_OUT_DIR()
 add_subdirectory(${CEF_LIBCEF_DLL_WRAPPER_PATH} libcef_dll_wrapper)
+target_compile_definitions(libcef_dll_wrapper PRIVATE "$<$<CONFIG:Profile>:NDEBUG>")
 
 # Find required libraries and update compiler/linker variables.
 FIND_LINUX_LIBRARIES("gmodule-2.0 gtk+-3.0 gthread-2.0 gtk+-unix-print-3.0 xi")
